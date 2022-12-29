@@ -1,45 +1,42 @@
-require('dotenv').config();
 const source = require('./constants');
-
-
 
 module.exports.buildFeedSourceConfig = function(from_symbol, to_symbol, providers) {
     var feed_source_config = [];
-    providers.forEach(function (provider) {
-        if (provider === source.BITTRUE) {
+    providers.forEach(function (element) {
+        if (element.provider === source.BITTRUE) {
             feed_source_config.push(
-                { provider_name: provider, 
+                { provider_name: element.provider, 
                   url: getBittrueUrl(from_symbol, to_symbol),
                   method: 'GET',
                   data: {},
-                  headers: { "api-key": process.env.API_KEY },
+                  headers: { "api-key": element.apikey },
                  });
         }
-        else if(provider === source.KUCOIN){
+        else if(element.provider === source.KUCOIN){
             feed_source_config.push(
-                { provider_name: provider, 
+                { provider_name: element.provider, 
                   url: getKuCoinUrl(from_symbol, to_symbol),
                   method: 'GET',
                   data: {},
-                  headers: { "api-key": process.env.API_KEY },
+                  headers: { "api-key": element.apikey},
                  });
         }
-        else if(provider === source.TL_CRYPTO_COMPARE){
+        else if(element.provider === source.TL_CRYPTO_COMPARE){
             feed_source_config.push(
-                { provider_name: provider, 
+                { provider_name: element.provider, 
                   url: getTeejlabCryptoCompareUrl(),
                   method: 'POST',
                   data: { "fsyms": from_symbol, "tsyms": to_symbol },
-                  headers: { "api-key": process.env.API_KEY },
+                  headers: { "api-key": element.apikey },
                  });
         }
-        else if(provider === source.TL_TRADER_MADE){
+        else if(element.provider === source.TL_TRADER_MADE){
             feed_source_config.push(
-                { provider_name: provider, 
+                { provider_name: element.provider, 
                   url: getTeejlabTraderMadeUrl(),
                   method: 'POST',
                   data: { "fsyms": from_symbol, "tsyms": to_symbol },
-                  headers: { "api-key": process.env.API_KEY },
+                  headers: { "api-key": element.apikey },
                  });
         }
     });

@@ -1,14 +1,16 @@
-require('dotenv').config();
 const axios = require('axios');
 const config = require('./config');
 const constants = require('./constants');
 
-/* 
-sample input data
-const from_symbol = 'XDC';
-const to_symbol = 'USDT';
-const providers = [constants.BITTRUE, constants.KUCOIN, constants.TL_CRYPTO_COMPARE];
-*/
+ 
+//sample input data
+// const from_symbol = 'XDC';
+// const to_symbol = 'USDT';
+//const providers = [constants.BITTRUE, constants.KUCOIN, constants.TL_CRYPTO_COMPARE];
+// const providers = [{provider:constants.BITTRUE,apikey:"XXXXXXXXXXXXXXXXXXXXXXXXXX"},
+//                    {provider:constants.KUCOIN,apikey:"XXXXXXXXXXXXXXXXXXXXXXXXXX"},
+//                    {provider:constants.TL_CRYPTO_COMPARE,apikey:"XXXXXXXXXXXXXXXXXXXXXXXXXX"},
+//                   ]
 
 module.exports.validatePriceFeedData = async function(from_symbol,to_symbol,providers) {
     // Test Data 
@@ -17,7 +19,9 @@ module.exports.validatePriceFeedData = async function(from_symbol,to_symbol,prov
     const feed_source_config = config.buildFeedSourceConfig(from_symbol,to_symbol,providers);
     try {
         var allResponses = await feed_source_config.map(async config => {
+            console.log(config.headers);
             let resp = await axios(config);
+            console.log("YES");
             return resp;
         })
         const responses = await Promise.all(allResponses)
