@@ -19,9 +19,7 @@ module.exports.validatePriceFeedData = async function(from_symbol,to_symbol,prov
     const feed_source_config = config.buildFeedSourceConfig(from_symbol,to_symbol,providers);
     try {
         var allResponses = await feed_source_config.map(async config => {
-            console.log(config.headers);
             let resp = await axios(config);
-            console.log("YES");
             return resp;
         })
         const responses = await Promise.all(allResponses)
