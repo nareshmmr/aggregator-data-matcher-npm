@@ -1,0 +1,16 @@
+{
+  "name": "aggregator-data-matcher",
+  "version": "1.0.0",
+  "description": "Do cross-vetting the price feed value from different API’s & find the values that are out of range",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^1.2.2",
+    "dotenv": "^16.0.3"
+  }
+}
